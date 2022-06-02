@@ -20,6 +20,7 @@ export const Grid: FC<IProps> = ({ state, config }) => {
     }, config.tickDuration);
 
     return () => {
+      window.clearInterval(timer.current as number);
       timer.current = null;
     };
   }, [config.size, config.tickDuration]);
