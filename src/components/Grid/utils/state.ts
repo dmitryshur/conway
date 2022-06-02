@@ -45,7 +45,7 @@ export const getLiveNeighborCount = (state: TGridState, row: number, column: num
   let count = 0;
   for (let deltaRow of deltas) {
     for (let deltaColumn of deltas) {
-      if (deltaRow === deltaColumn) continue;
+      if (deltaRow === 0 && deltaColumn === 0) continue;
 
       const neighborRow = (row + deltaRow) % size;
       const neighborColumn = (column + deltaColumn) % size;
@@ -57,8 +57,7 @@ export const getLiveNeighborCount = (state: TGridState, row: number, column: num
   return count;
 };
 
-const getRandomState = (size: number): TGridState => {
-  const density = 0.4;
+const getRandomState = (size: number, density: number = 0.4): TGridState => {
   const state: TGridState = new Array(size).fill(0).map(() => new Array(size).fill(0));
 
   for (let i = 0; i < size; i++) {
