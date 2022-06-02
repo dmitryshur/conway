@@ -1,0 +1,9 @@
+.Cell {
+  width: 20px;
+  height: 20px;
+  border: 1px solid #ccc;
+}
+
+.Cell--alive {
+  background-color: #000;
+}
