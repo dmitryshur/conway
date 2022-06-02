@@ -6,17 +6,24 @@ import './Grid.css';
 
 interface IProps {
   size?: number;
+  state?: TGridState;
 }
 
-export const Grid: FC<IProps> = ({ size = 5 }) => {
-  const [gridState, setGridState] = useState<TGridState>(getGridState(size));
+export const Grid: FC<IProps> = ({ size = 5, state }) => {
+  const [gridState, setGridState] = useState<TGridState>(state || getGridState(size));
+
+  useEffect(() => {
+    setInterval(() => {
+      setGridState(prevState => getGridState(size, prevState));
+    }, 500);
+  }, [size]);
 
   return (
     <div className="Grid">
-      {gridState.map((row, i) => (
+      {gridState.map(row => (
         <div key={row[0].id} className="Grid__row">
           {row.map(cell => (
-            <Cell key={cell.id} state={cell.state} />
+            <Cell key={cell.id} id={cell.id} state={cell.state} />
           ))}
         </div>
       ))}
